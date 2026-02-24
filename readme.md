@@ -21,7 +21,7 @@ Este é um protótipo funcional de um site com **Design One Page / Scroll**, des
 - Call-to-action estratégicos
 
 ## 🏗️ Estrutura do Site
-
+```
 +--------------------------------------------------------------------+
 |  LOGO                    MENU (âncoras)                           |
 +--------------------------------------------------------------------+
@@ -43,6 +43,7 @@ Este é um protótipo funcional de um site com **Design One Page / Scroll**, des
 +--------------------------------------------------------------------+
 |  RODAPÉ                                                            |
 +--------------------------------------------------------------------+
+```
 
 ## ✨ Funcionalidades Implementadas
 
