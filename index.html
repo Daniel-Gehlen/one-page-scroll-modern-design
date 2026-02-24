@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>One Page Scroll | Design Moderno</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #f8f9fa;
+            line-height: 1.6;
+        }
+
+        /* Container principal */
+        .site-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 30px rgba(0,0,0,0.1);
+        }
+
+        /* ASCII Art do design */
+        .ascii-art {
+            background: #1a1a1a;
+            color: #00ff9d;
+            font-family: 'Courier New', monospace;
+            padding: 20px;
+            border-bottom: 3px solid #333;
+            overflow-x: auto;
+        }
+
+        .ascii-art pre {
+            margin: 0;
+            font-size: 14px;
+            line-height: 1.4;
+            letter-spacing: 0px;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        /* Header fixo com menu âncora */
+        .header {
+            position: sticky;
+            top: 0;
+            background: white;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #e0e0e0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
+        }
+
+        .menu {
+            display: flex;
+            gap: 30px;
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 25px;
+            transition: 0.3s;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            border: 2px solid transparent;
+        }
+
+        .menu a:hover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-text-fill-color: white;
+            border: 2px solid #667eea;
+            transform: translateY(-2px);
+        }
+
+        /* Seções comuns */
+        section {
+            padding: 80px 40px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 120px 40px;
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            margin-bottom: 20px;
+            font-weight: 800;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .hero p {
+            font-size: 20px;
+            max-width: 600px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 18px;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            border: 2px solid white;
+        }
+
+        .cta-button:hover {
+            background: transparent;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* SEÇÃO SOBRE */
+        .about {
+            background: white;
+        }
+
+        .about-content {
+            display: flex;
+            gap: 50px;
+            align-items: center;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text p {
+            color: #666;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .about-image {
+            flex: 1;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 300px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 100px;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        /* SEÇÃO SERVIÇOS */
+        .services {
+            background: #f8f9fa;
+        }
+
+        .cards-container {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            flex: 1;
+            min-width: 250px;
+            max-width: 300px;
+            text-align: center;
+            transition: 0.3s;
+            border: 1px solid #eee;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.15);
+            border-color: #667eea;
+        }
+
+        .card-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .card p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .card-link {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            padding: 8px 20px;
+            border: 2px solid #667eea;
+            border-radius: 25px;
+            transition: 0.3s;
+        }
+
+        .card-link:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        /* SEÇÃO PORTFÓLIO */
+        .portfolio {
+            background: white;
+        }
+
+        .portfolio-grid {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .portfolio-item {
+            flex: 1;
+            min-width: 250px;
+            max-width: 300px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 200px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 48px;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .portfolio-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .portfolio-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .portfolio-item:hover::before {
+            opacity: 1;
+        }
+
+        .portfolio-item span {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* SEÇÃO CONTATO */
+        .contact {
+            background: #f8f9fa;
+        }
+
+        .contact-container {
+            display: flex;
+            gap: 50px;
+            max-width: 1000px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+
+        .contact-form {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .contact-map {
+            flex: 1;
+            min-width: 300px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            height: 300px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        /* RODAPÉ */
+        .footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .footer p {
+            margin-bottom: 10px;
+            opacity: 0.8;
+        }
+
+        .footer a {
+            color: #667eea;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .footer a:hover {
+            color: white;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px;
+            }
+
+            .menu {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .about-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            section {
+                padding: 40px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="site-container">
+        <!-- ASCII Art do design One Page -->
+        <div class="ascii-art">
+            <pre>
++--------------------------------------------------------------------+
+|  LOGO                    MENU (âncoras)                           |
++--------------------------------------------------------------------+
+|                                                                    |
+|                       HERO SECTION                                 |
+|                 Título Principal                                   |
+|                 Call-to-action                                     |
+|                                                                    |
++--------------------------------------------------------------------+
+|                                                                    |
+|                     SEÇÃO SOBRE                                    |
+|                   Texto e imagem                                   |
+|                                                                    |
++--------------------------------------------------------------------+
+|                                                                    |
+|                    SEÇÃO SERVIÇOS                                  |
+|               [Card]     [Card]     [Card]                         |
+|                                                                    |
++--------------------------------------------------------------------+
+|                                                                    |
+|                    SEÇÃO PORTFÓLIO                                 |
+|               [Img]      [Img]      [Img]                          |
+|                                                                    |
++--------------------------------------------------------------------+
+|                                                                    |
+|                    SEÇÃO CONTATO                                   |
+|               Formulário + Mapa                                    |
+|                                                                    |
++--------------------------------------------------------------------+
+|  RODAPÉ                                                            |
++--------------------------------------------------------------------+
+            </pre>
+        </div>
+
+        <!-- HEADER com menu âncora -->
+        <header class="header">
+            <div class="logo">OnePageScroll</div>
+            <nav class="menu">
+                <a href="#home">Home</a>
+                <a href="#sobre">Sobre</a>
+                <a href="#servicos">Serviços</a>
+                <a href="#portfolio">Portfólio</a>
+                <a href="#contato">Contato</a>
+            </nav>
+        </header>
+
+        <!-- HERO SECTION -->
+        <section id="home" class="hero">
+            <h1>Design One Page</h1>
+            <p>Experiência completa em uma única página com navegação fluida e storytelling visual</p>
+            <a href="#contato" class="cta-button">Começar Projeto</a>
+        </section>
+
+        <!-- SEÇÃO SOBRE -->
+        <section id="sobre" class="about">
+            <h2 class="section-title">Sobre Nós</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>O design One Page é perfeito para contar histórias de forma linear e envolvente. Com navegação por âncoras, o usuário percorre toda a experiência sem sair da página.</p>
+                    <p>Ideal para portfólios, landing pages, eventos e produtos específicos, este formato mantém o foco no conteúdo e na conversão.</p>
+                    <p><strong>Storytelling visual:</strong> Cada seção é um capítulo da sua história.</p>
+                    <a href="#servicos" style="color: #667eea; text-decoration: none; font-weight: 600;">Conheça nossos serviços →</a>
+                </div>
+                <div class="about-image">
+                    <span>📖</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO SERVIÇOS -->
+        <section id="servicos" class="services">
+            <h2 class="section-title">Nossos Serviços</h2>
+            <div class="cards-container">
+                <div class="card" onclick="window.location.href='#'">
+                    <div class="card-icon">🎨</div>
+                    <h3>Design UI/UX</h3>
+                    <p>Criamos interfaces intuitivas e experiências memoráveis para seu projeto.</p>
+                    <a href="#" class="card-link">Saiba mais</a>
+                </div>
+                <div class="card" onclick="window.location.href='#'">
+                    <div class="card-icon">⚡</div>
+                    <h3>Performance</h3>
+                    <p>Sites otimizados para carregamento rápido e melhor conversão.</p>
+                    <a href="#" class="card-link">Saiba mais</a>
+                </div>
+                <div class="card" onclick="window.location.href='#'">
+                    <div class="card-icon">📱</div>
+                    <h3>Responsividade</h3>
+                    <p>Design que se adapta perfeitamente a qualquer dispositivo.</p>
+                    <a href="#" class="card-link">Saiba mais</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO PORTFÓLIO -->
+        <section id="portfolio" class="portfolio">
+            <h2 class="section-title">Portfólio</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item" onclick="window.open('https://example.com/projeto1', '_blank')" title="Ver projeto 1">
+                    <span>🖼️ Projeto 1</span>
+                </div>
+                <div class="portfolio-item" onclick="window.open('https://example.com/projeto2', '_blank')" title="Ver projeto 2">
+                    <span>🖼️ Projeto 2</span>
+                </div>
+                <div class="portfolio-item" onclick="window.open('https://example.com/projeto3', '_blank')" title="Ver projeto 3">
+                    <span>🖼️ Projeto 3</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO CONTATO -->
+        <section id="contato" class="contact">
+            <h2 class="section-title">Entre em Contato</h2>
+            <div class="contact-container">
+                <div class="contact-form">
+                    <form action="#" method="GET" onsubmit="alert('Formulário enviado com sucesso! (Demonstração)'); return false;">
+                        <div class="form-group">
+                            <input type="text" placeholder="Seu nome" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Seu e-mail" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" placeholder="Assunto">
+                        </div>
+                        <div class="form-group">
+                            <textarea placeholder="Sua mensagem" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Enviar Mensagem</button>
+                    </form>
+                </div>
+                <div class="contact-map">
+                    <span>🗺️ Mapa Interativo<br><small style="font-size: 14px;">Clique para abrir no Google Maps</small></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- RODAPÉ -->
+        <footer class="footer">
+            <div class="footer-content">
+                <p>📍 Av. Tal, 1000 - Tal/TL</p>
+                <p>📧 contato@onepagescroll.com | 📱 (11) 99999-8888</p>
+                <p>
+                    <a href="https://facebook.com" target="_blank">Facebook</a> • 
+                    <a href="https://instagram.com" target="_blank">Instagram</a> • 
+                    <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+                </p>
+                <p style="margin-top: 20px; font-size: 14px;">&copy; 2026 OnePageScroll - Todos os direitos reservados</p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
