@@ -1,6 +1,5 @@
 # Design One Page / Scroll
 
-```markdown
 # 📱 OnePageScroll - Design One Page
 
 ![Versão](https://img.shields.io/badge/versão-1.0.0-blue)
@@ -23,7 +22,6 @@ Este é um protótipo funcional de um site com **Design One Page / Scroll**, des
 
 ## 🏗️ Estrutura do Site
 
-```markdown
 +--------------------------------------------------------------------+
 |  LOGO                    MENU (âncoras)                           |
 +--------------------------------------------------------------------+
